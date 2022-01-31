@@ -63,3 +63,5 @@ Then run it:
 This should build version 4.1.0 of OpenCV, with CUDA optimisations.  
 
 # Install PyTorch and torchvision
+
+TODO for installation of YOLO
