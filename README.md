@@ -19,6 +19,10 @@ Check the python version currently installed:
 ``` 
 python --version
 ```
+If required, complete and installation:
+``` sudo apt install python 3.8-dev
+```
+This build may take a while.
 
 
 #  Configuring and running RPi HQ Camera
