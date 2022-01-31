@@ -66,4 +66,4 @@ Another resource that may prove useful can be found at this link: https://qengin
 
 # Install PyTorch and torchvision
 
-TODO for installation of YOLO
+Following the guide found at this link: https://qengineering.eu/install-pytorch-on-jetson-nano.html
