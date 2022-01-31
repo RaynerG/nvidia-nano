@@ -48,7 +48,7 @@ This build may take a while.
 
 # Install recent version of OpenCV
 
-Use the script file provided, or go to the original repo: github.com/mdegans/nano_build_opencv
+Use the script file provided, or go to the original repo: https://github.com/mdegans/nano_build_opencv
 
 Create the file called ```build_opencv.sh``` and copy the contents into it.  Make it executable by:
 ``` 
