@@ -35,6 +35,8 @@ nvgstcapture-1.0
 ```
 This should display a camera window, press ctrl+c to exit.  More details in the docs: https://developer.nvidia.com/embedded/learn/tutorials/first-picture-csi-usb-camera
 
+The following repo has some good basic programs to test the camera and nano working together: https://github.com/JetsonHacksNano/CSI-Camera
+
 # Install recent version of python
 Check the python version currently installed:
 ``` 
@@ -59,3 +61,5 @@ Then run it:
 ./build_opencv.sh
 ```
 This should build version 4.1.0 of OpenCV, with CUDA optimisations.  
+
+# Install PyTorch and torchvision
