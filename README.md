@@ -15,15 +15,6 @@ gedit
 ```
 Then Go to preferences and turn on line numbers, highlight current line and matching brackets, and set a colour mode.  Tab width can be set to 4.  Plugins including External Tools and Snippets can also be chosen.
 
-Check the python version currently installed:
-``` 
-python --version
-```
-If required, complete and installation:
-``` sudo apt install python 3.8-dev
-```
-This build may take a while.
-
 
 #  Configuring and running RPi HQ Camera
 
@@ -43,3 +34,27 @@ After reboot, test the operation by running:
 nvgstcapture-1.0
 ```
 This should display a camera window, press ctrl+c to exit.  More details in the docs: https://developer.nvidia.com/embedded/learn/tutorials/first-picture-csi-usb-camera
+
+# Install recent version of python
+Check the python version currently installed:
+``` 
+python --version
+```
+If required, complete and installation:
+``` sudo apt install python 3.8-dev
+```
+This build may take a while.
+
+# Install recent version of OpenCV
+
+Use the script file provided, or go to the original repo: github.com/mdegans/nano_build_opencv
+
+Create the file called ```build_opencv.sh``` and copy the contents into it.  Make it executable by:
+``` 
+chmod +x build_opencv.sh
+```
+Then run it:
+```
+./build_opencv.sh
+```
+This should build version 4.1.0 of OpenCV, with CUDA optimisations.  
