@@ -7,7 +7,17 @@ Follow the documentation: https://developer.nvidia.com/embedded/learn/get-starte
 
 Ensure to update to most recent software versions if prompted.
 
-# Install utility programs
+# Configuration
+
+Firstly, remove un-needed LibreOffice, which is not required for deep learning:
+``` 
+sudo apt-get purge libreoffice*
+sudo apt-get clean
+```
+Now ensure the board is fully updated:
+``` 
+sudo apt-get update && sudo apt-get upgrade
+```
 
 Customise gedit by running it on the command line:
 ```
@@ -94,4 +104,56 @@ sudo -H pip3 install torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
 # clean up
 rm torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
 ```
+You can check successful install by the following:
+``` 
+python3
+import torch as tr
+tr.__version__
+print(tr.rand(3,4))
+print(tr.hypot(tr.tensor([1.]),tr.tensor([1.])))
+exit()
+```
+
+Now install torchvision:
+```
+sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev
+sudo pip3 install -U pillow
+sudo -H pip3 install gdown
+gdown https://drive.google.com/uc?id=1C7y6VSIBkmL2RQnVy8xF9cAnrrpJiJ-K
+sudo -H pip3 install torchvision-0.11.0a0+fa347eb-cp36-cp36m-linux_aarch64.whl
+rm torchvision-0.11.0a0+fa347eb-cp36-cp36m-linux_aarch64.whl
+```
+You can verify successful installation by the following:
+``` 
+python3
+import torchvision as tv
+tv.__version__
+exit()
+```
+# Install other dependencies for YOLOv5
+
+Assuming that the above listed installations of python3, pytorch and torchvision have been successful, the remaining requirements can be installed as follows.
+
+Firstly numpy to the correct version:
+```
+pip3 install numpy==1.17 --upgrade
+python3
+numpy.__version__
+exit()
+```
+Then matplotlib:
+```
+sudo apt-get install python3-matplotlib
+```
+
+# Attempt #2
+Try following the following instructions:
+https://github.com/ultralytics/yolov5/issues/2524
+
+Converter from pytorch to trt:
+https://github.com/NVIDIA-AI-IOT/torch2trt
+
+Full tutorials:
+https://github.com/dusty-nv/jetson-inference
 
