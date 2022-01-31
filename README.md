@@ -48,6 +48,15 @@ sudo apt install python 3.8-dev
 ```
 This build may take a while.
 
+Now install pip:
+```
+sudo apt install python3-pip
+pip3 --version
+sudo -F pip3 install --upgrade pip
+pip3 --version
+```
+This installs pip3, and ensures that it is updated to the latest version.
+
 # Install recent version of OpenCV
 
 Use the script file provided, or go to the original repo: https://github.com/mdegans/nano_build_opencv
@@ -67,3 +76,5 @@ Another resource that may prove useful can be found at this link: https://qengin
 # Install PyTorch and torchvision
 
 Following the guide found at this link: https://qengineering.eu/install-pytorch-on-jetson-nano.html
+
+First, install the dependencies:
