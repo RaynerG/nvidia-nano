@@ -77,4 +77,21 @@ Another resource that may prove useful can be found at this link: https://qengin
 
 Following the guide found at this link: https://qengineering.eu/install-pytorch-on-jetson-nano.html
 
-First, install the dependencies:
+First, install the dependencies, and then the pre-made installation wheel:
+```
+sudo apt-get install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev
+sudo -H pip3 install future
+sudo pip3 install -U --user wheel mock pillow
+sudo -H pip3 install testresources
+# above version 58.3.0 there may be version issues
+sudo -H pip3 install setuptools==58.3.0
+sudo -H pip3 install Cython
+# install gdown to download from google drive
+sudo -H pip3 install gdown
+gdown https://drive.google.com/uc?id=1TqC6_2cwqiYacjoLhLgrZoap6-sVL2sd
+# install torch
+sudo -H pip3 install torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
+# clean up
+rm torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
+```
+
