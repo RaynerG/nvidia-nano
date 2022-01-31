@@ -62,6 +62,8 @@ Then run it:
 ```
 This should build version 4.1.0 of OpenCV, with CUDA optimisations.  Will take quite some time, and requires some user installation confirmation to finalise.
 
+Another resource that may prove useful can be found at this link: https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html
+
 # Install PyTorch and torchvision
 
 TODO for installation of YOLO
