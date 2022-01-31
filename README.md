@@ -9,7 +9,7 @@ Ensure to update to most recent software versions if prompted.
 
 # Install utility programs
 
-Update gedit by running it on the command line:
+Customise gedit by running it on the command line:
 ```
 gedit
 ```
@@ -60,7 +60,7 @@ Then run it:
 ```
 ./build_opencv.sh
 ```
-This should build version 4.1.0 of OpenCV, with CUDA optimisations.  
+This should build version 4.1.0 of OpenCV, with CUDA optimisations.  Will take quite some time, and requires some user installation confirmation to finalise.
 
 # Install PyTorch and torchvision
 
