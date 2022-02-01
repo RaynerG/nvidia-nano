@@ -123,8 +123,14 @@ Following the instructions from the following two links:
 https://github.com/ultralytics/yolov5/issues/2524
 https://forums.developer.nvidia.com/t/illegal-instruction-core-dumped/165488/6
 
-
-
+```
+wget https://nvidia.box.com/shared/static/p57jwntv436lfrd78inwl7iml6p13fzh.whl -O torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+sudo apt-get install python3-pip libopenblas-base libopenmpi-dev
+pip3 install Cython
+pip3 install numpy=1.19.4 torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+rm torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+```
+Note that numpy1.19.5 causes a seg fault, so we are using 1.19.4
 
 # Install Torchvision
 
