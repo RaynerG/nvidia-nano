@@ -25,6 +25,21 @@ gedit
 ```
 Then Go to preferences and turn on line numbers, highlight current line and matching brackets, and set a colour mode.  Tab width can be set to 4.  Plugins including External Tools and Snippets can also be chosen.
 
+*Importantly*, create a virtual environment by first installing:
+```
+sudo apt-get install python3-venv
+```
+Create a project directory and move to it, then create and activate the virtual env:
+```
+python3 -m venv venv_name
+source venv_name/bin/activate
+deactivate
+```
+A list of requirements can be done by:
+```
+pip3 freeze > requirements.txt
+```
+From here, ensure all software packages are installed while in this virtual env.
 
 #  Configuring and running RPi HQ Camera
 
