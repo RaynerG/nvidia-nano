@@ -157,6 +157,11 @@ https://github.com/NVIDIA-AI-IOT/torch2trt
 Full tutorials:
 https://github.com/dusty-nv/jetson-inference
 
+# Version 3
+
+Follow this:
+https://www.pyimagesearch.com/2020/03/25/how-to-configure-your-nvidia-jetson-nano-for-computer-vision-and-deep-learning/
+
 # Finalisation
 
 To capture the dependencies required for the project, do the following in the project directory:
