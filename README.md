@@ -152,6 +152,44 @@ tv.__version__
 exit()
 ```
 
+# Install PyTorch and Torchvision (official version)
+
+Follow instructions here:
+https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-10-now-available/72048
+
+Now install PyTorch v1.10.0:
+```
+wget https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl -O torch-1.10.0-cp36-cp36m-linux_aarch64.whl
+sudo apt-get install python3-pip libopenblas-base libopenmpi-dev
+pip3 install Cython
+pip3 install numpy torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+```
+Now install Torchvison v0.11.1
+```
+sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
+git clone --branch v0.11.1 https://github.com/pytorch/vision torchvision
+cd torchvision
+export BUILD_VERSION=0.11.1
+python3 setup.py install --user
+cd ../
+```
+To verify, start python3 and do:
+```
+import torch
+print(torch.__version__)
+print('CUDA available: ' + str(torch.cuda.is_available()))
+print('cuDNN version: ' + str(torch.backends.cudnn.version()))
+a = torch.cuda.FloatTensor(2).zero_()
+print('Tensor a = ' + str(a))
+b = torch.randn(2).cuda()
+print('Tensor b = ' + str(b))
+c = a + b
+print('Tensor c = ' + str(c))
+
+import torchvision
+print(torchvision.__version__)
+```
+
 # Install recent version of OpenCV
 
 Use the script file provided, or go to the original repo: https://github.com/mdegans/nano_build_opencv
