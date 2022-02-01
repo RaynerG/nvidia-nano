@@ -67,7 +67,7 @@ Check the python version currently installed:
 ``` 
 python --version
 ```
-If required, complete and installation:
+It should be fine to use 3.6  If required, complete and installation:
 ``` 
 sudo apt install python 3.8-dev
 ```
@@ -82,23 +82,9 @@ pip3 --version
 ```
 This installs pip3, and ensures that it is updated to the latest version.
 
-# Install recent version of OpenCV
+# Install PyTorch (hard version)
 
-Use the script file provided, or go to the original repo: https://github.com/mdegans/nano_build_opencv
-
-Create the file called ```build_opencv.sh``` and copy the contents into it.  Make it executable by:
-``` 
-chmod +x build_opencv.sh
-```
-Then run it:
-```
-./build_opencv.sh
-```
-This should build version 4.1.0 of OpenCV, with CUDA optimisations.  Will take quite some time, and requires some user installation confirmation to finalise.
-
-Another resource that may prove useful can be found at this link: https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html
-
-# Install PyTorch and torchvision
+This version wasn't working in the virtual environment.  The wheel may be incompatible.
 
 Following the guide found at this link: https://qengineering.eu/install-pytorch-on-jetson-nano.html
 
@@ -129,6 +115,19 @@ print(tr.hypot(tr.tensor([1.]),tr.tensor([1.])))
 exit()
 ```
 
+# Install PyTorch (easy version)
+
+This version may not use the correct compiler, which may cause unstable behaviour and some errors.
+
+Following the instructions from the following two links:
+https://github.com/ultralytics/yolov5/issues/2524
+https://forums.developer.nvidia.com/t/illegal-instruction-core-dumped/165488/6
+
+
+
+
+# Install Torchvision
+
 Now install torchvision:
 ```
 sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev
@@ -146,6 +145,23 @@ import torchvision as tv
 tv.__version__
 exit()
 ```
+
+# Install recent version of OpenCV
+
+Use the script file provided, or go to the original repo: https://github.com/mdegans/nano_build_opencv
+
+Create the file called ```build_opencv.sh``` and copy the contents into it.  Make it executable by:
+``` 
+chmod +x build_opencv.sh
+```
+Then run it:
+```
+./build_opencv.sh
+```
+This should build version 4.1.0 of OpenCV, with CUDA optimisations.  Will take quite some time, and requires some user installation confirmation to finalise.
+
+Another resource that may prove useful can be found at this link: https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html
+
 # Install other dependencies for YOLOv5
 
 Assuming that the above listed installations of python3, pytorch and torchvision have been successful, the remaining requirements can be installed as follows.
