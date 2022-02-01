@@ -162,7 +162,7 @@ Now install PyTorch v1.10.0:
 wget https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl -O torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 sudo apt-get install python3-pip libopenblas-base libopenmpi-dev
 pip3 install Cython
-pip3 install numpy torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+pip3 install numpy torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 ```
 Now install Torchvison v0.11.1
 ```
