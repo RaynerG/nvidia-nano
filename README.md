@@ -157,3 +157,11 @@ https://github.com/NVIDIA-AI-IOT/torch2trt
 Full tutorials:
 https://github.com/dusty-nv/jetson-inference
 
+# Finalisation
+
+To capture the dependencies required for the project, do the following in the project directory:
+```
+pip3 freeze > requirements.txt
+```
+This will enable restoration if required.
+
