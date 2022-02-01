@@ -9,7 +9,7 @@ Ensure to update to most recent software versions if prompted.
 
 # Configuration
 
-Firstly, remove un-needed LibreOffice, which is not required for deep learning:
+Optionally, remove un-needed LibreOffice, which is not required for deep learning:
 ``` 
 sudo apt-get purge libreoffice*
 sudo apt-get clean
@@ -19,7 +19,7 @@ Now ensure the board is fully updated:
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-Customise gedit by running it on the command line:
+Optionally, customise gedit by running it on the command line:
 ```
 gedit
 ```
@@ -77,10 +77,55 @@ Now install pip:
 ```
 sudo apt install python3-pip
 pip3 --version
-sudo -F pip3 install --upgrade pip
+pip3 install --upgrade pip
 pip3 --version
 ```
 This installs pip3, and ensures that it is updated to the latest version.
+
+# Install PyTorch and Torchvision
+
+Note that this is based on Jetpack v4.6, and follows the official instructions found at [this link](https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-10-now-available/72048).
+
+These packages were installed in a virtual environment created as outlined above.
+
+I chose to install PyTorch v1.8.0 and Torchvision v0.9.0 in the hope of compatibility.  To choose different versions, modify the links and version numbers in the commands, as outlined in the original instructions.
+```
+wget https://nvidia.box.com/shared/static/p57jwntv436lfrd78inwl7iml6p13fzh.whl -O torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+sudo apt-get install python3-pip libopenblas-base libopenmpi-dev 
+pip3 install Cython
+pip3 install numpy==1.19.4 
+pip3 install torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+rm torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+```
+Note that it is important to install Numpy v1.19.4, as 1.19.5 has conflicts that cause a seg fault.
+
+Now for torchvision:
+```
+sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
+git clone --branch v0.9.0 https://github.com/pytorch/vision torchvision
+cd torchvision
+export BUILD_VERSION=0.9.0
+python3 setup.py install 
+cd ../
+```
+Now verification can be completed by starting python3 and running the following:
+```
+import torch
+print(torch.__version__)
+print('CUDA available: ' + str(torch.cuda.is_available()))
+print('cuDNN version: ' + str(torch.backends.cudnn.version()))
+a = torch.cuda.FloatTensor(2).zero_()
+print('Tensor a = ' + str(a))
+b = torch.randn(2).cuda()
+print('Tensor b = ' + str(b))
+c = a + b
+print('Tensor c = ' + str(c))
+
+import torchvision
+print(torchvision.__version__)
+```
+Should be good to go now!
+
 
 # Install PyTorch (hard version)
 
