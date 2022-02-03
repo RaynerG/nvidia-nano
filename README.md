@@ -255,17 +255,6 @@ Another resource that may prove useful can be found at this link: https://qengin
 
 Assuming that the above listed installations of python3, pytorch and torchvision have been successful, the remaining requirements can be installed as follows.
 
-Firstly numpy to the correct version:
-```
-pip3 install numpy==1.17 --upgrade
-python3
-numpy.__version__
-exit()
-```
-Then matplotlib:
-```
-sudo apt-get install python3-matplotlib
-```
 
 # Attempt #2
 Try following the following instructions:
