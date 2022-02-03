@@ -75,7 +75,7 @@ Check the python version currently installed:
 ``` 
 python --version
 ```
-It should be fine to use 3.6  If required, complete and installation:
+I am currently using python3.6.9, and YOLOv5 is running slowly.  It may be required to install python3.8 instead, will determine this later.
 ``` 
 sudo apt install python 3.8-dev
 ```
@@ -133,115 +133,6 @@ import torchvision
 print(torchvision.__version__)
 ```
 Should be good to go now!
-
-
-# Install PyTorch (hard version)
-
-This version wasn't working in the virtual environment.  The wheel may be incompatible.
-
-Following the guide found at this link: https://qengineering.eu/install-pytorch-on-jetson-nano.html
-
-First, install the dependencies, and then the pre-made installation wheel:
-```
-sudo apt-get install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev
-sudo -H pip3 install future
-sudo pip3 install -U --user wheel mock pillow
-sudo -H pip3 install testresources
-# above version 58.3.0 there may be version issues
-sudo -H pip3 install setuptools==58.3.0
-sudo -H pip3 install Cython
-# install gdown to download from google drive
-sudo -H pip3 install gdown
-gdown https://drive.google.com/uc?id=1TqC6_2cwqiYacjoLhLgrZoap6-sVL2sd
-# install torch
-sudo -H pip3 install torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
-# clean up
-rm torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
-```
-You can check successful install by the following:
-``` 
-python3
-import torch as tr
-tr.__version__
-print(tr.rand(3,4))
-print(tr.hypot(tr.tensor([1.]),tr.tensor([1.])))
-exit()
-```
-
-# Install PyTorch (easy version)
-
-This version may not use the correct compiler, which may cause unstable behaviour and some errors.
-
-Following the instructions from the following two links:
-https://github.com/ultralytics/yolov5/issues/2524
-https://forums.developer.nvidia.com/t/illegal-instruction-core-dumped/165488/6
-
-```
-wget https://nvidia.box.com/shared/static/p57jwntv436lfrd78inwl7iml6p13fzh.whl -O torch-1.8.0-cp36-cp36m-linux_aarch64.whl
-sudo apt-get install python3-pip libopenblas-base libopenmpi-dev
-pip3 install Cython
-pip3 install numpy=1.19.4 torch-1.8.0-cp36-cp36m-linux_aarch64.whl
-rm torch-1.8.0-cp36-cp36m-linux_aarch64.whl
-```
-Note that numpy1.19.5 causes a seg fault, so we are using 1.19.4
-
-# Install Torchvision
-
-Now install torchvision:
-```
-sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev
-sudo pip3 install -U pillow
-sudo -H pip3 install gdown
-gdown https://drive.google.com/uc?id=1C7y6VSIBkmL2RQnVy8xF9cAnrrpJiJ-K
-sudo -H pip3 install torchvision-0.11.0a0+fa347eb-cp36-cp36m-linux_aarch64.whl
-rm torchvision-0.11.0a0+fa347eb-cp36-cp36m-linux_aarch64.whl
-```
-You can verify successful installation by the following:
-``` 
-python3
-import torchvision as tv
-tv.__version__
-exit()
-```
-
-# Install PyTorch and Torchvision (official version)
-
-Follow instructions here:
-https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-10-now-available/72048
-
-Now install PyTorch v1.10.0:
-```
-wget https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl -O torch-1.10.0-cp36-cp36m-linux_aarch64.whl
-sudo apt-get install python3-pip libopenblas-base libopenmpi-dev
-pip3 install Cython
-pip3 install numpy torch-1.10.0-cp36-cp36m-linux_aarch64.whl
-```
-Now install Torchvison v0.11.1
-```
-sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
-git clone --branch v0.11.1 https://github.com/pytorch/vision torchvision
-cd torchvision
-export BUILD_VERSION=0.11.1
-python3 setup.py install --user
-cd ../
-```
-To verify, start python3 and do:
-```
-import torch
-print(torch.__version__)
-print('CUDA available: ' + str(torch.cuda.is_available()))
-print('cuDNN version: ' + str(torch.backends.cudnn.version()))
-a = torch.cuda.FloatTensor(2).zero_()
-print('Tensor a = ' + str(a))
-b = torch.randn(2).cuda()
-print('Tensor b = ' + str(b))
-c = a + b
-print('Tensor c = ' + str(c))
-
-import torchvision
-print(torchvision.__version__)
-```
 
 # Install OpenCV4 into virtual environment
 
