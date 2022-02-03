@@ -366,7 +366,12 @@ cd ~
 # create symlink
 ln -s /usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.so cv2.so
 ```
-That's about it.  You could follow the optional clean-up in the q-engineering article, but I won't outline that here.
+That's about it.  You could follow the optional clean-up in the q-engineering article, but I won't outline that here.  You can confirm that it is working by starting `python3` in the shell and running:
+```
+import cv2
+cv2.__version__
+```
+Fingers crossed, it will say `4.5.1` :))
 
 # Install other dependencies for YOLOv5
 
