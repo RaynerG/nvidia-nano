@@ -82,7 +82,7 @@ pip3 --version
 ```
 This installs pip3, and ensures that it is updated to the latest version.
 
-# Install PyTorch and Torchvision
+# Install PyTorch and Torchvision into virtual environment
 
 Note that this is based on Jetpack v4.6, and follows the official instructions found at [this link](https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-10-now-available/72048).
 
@@ -233,6 +233,31 @@ print('Tensor c = ' + str(c))
 
 import torchvision
 print(torchvision.__version__)
+```
+
+# Install OpenCV4 into virtual environment
+
+These instructions install OpenCV 4.5.1, based on the following links:
+https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html
+https://www.pyimagesearch.com/2020/03/25/how-to-configure-your-nvidia-jetson-nano-for-computer-vision-and-deep-learning/
+https://forums.developer.nvidia.com/t/install-opencv-for-python3-in-jetson-nano/74042/17
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+# install light text editor
+sudo apt-get install nano
+sudo apt-get install dphys-swapfile
+# increase swapfile size by changing variable CONF_MAXSWAP=4096
+sudo nano /sbin/dphys-swapfile
+# update this file also
+sudo nano /etc/dphys-swapfile
+sudo reboot
+```
+Install pre-requisites:
+```
+#check memory availabilty, need at least 6.5GB
+free -m
 ```
 
 # Install recent version of OpenCV
