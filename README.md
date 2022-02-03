@@ -383,7 +383,15 @@ Fingers crossed, it will say `4.5.1` :))
 
 # Install other dependencies for YOLOv5
 
-Assuming that the above listed installations of python3, pytorch and torchvision have been successful, the remaining requirements can be installed as follows.
+Assuming that the above listed installations of python3, pytorch and torchvision have been successful, the remaining requirements can be installed as follows.  Run these commands in the virtual environment.
+```
+pip install pandas>=1.1.4
+pip install requests>=2.23.0
+pip install PyYAML>=5.3.1
+pip install tqdm>=4.41.0
+pip install matplotlib>=3.2.2
+pip install seaborn>=0.11.0
+```
 
 # Finalisation
 
