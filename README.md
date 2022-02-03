@@ -256,45 +256,121 @@ sudo reboot
 ```
 Install pre-requisites:
 ```
-#check memory availabilty, need at least 6.5GB
+# check memory availabilty, need at least 6.5GB
 free -m
+# check CUDA location
+sudo sh -c "echo '/usr/local/cuda/lib64' >> /etc/ld.so.conf.d/nvidia-tegra.conf"
+sudo ldconfig
+# install libraries
+sudo apt-get install build-essential cmake git unzip pkg-config zlib1g-dev
+sudo apt-get install libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev
+sudo apt-get install libpng-dev libtiff-dev libglew-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install libgtk2.0-dev libgtk-3-dev libcanberra-gtk*
+sudo apt-get install python-dev python-numpy python-pip
+sudo apt-get install python3-dev python3-numpy python3-pip
+sudo apt-get install libxvidcore-dev libx264-dev libgtk-3-dev
+sudo apt-get install libtbb2 libtbb-dev libdc1394-22-dev libxine2-dev
+sudo apt-get install gstreamer1.0-tools libgstreamer-plugins-base1.0-dev
+sudo apt-get install libgstreamer-plugins-good1.0-dev
+sudo apt-get install libv4l-dev v4l-utils v4l2ucp qv4l2
+sudo apt-get install libtesseract-dev libxine2-dev libpostproc-dev
+sudo apt-get install libavresample-dev libvorbis-dev
+sudo apt-get install libfaac-dev libmp3lame-dev libtheora-dev
+sudo apt-get install libopencore-amrnb-dev libopencore-amrwb-dev
+sudo apt-get install libopenblas-dev libatlas-base-dev libblas-dev
+sudo apt-get install liblapack-dev liblapacke-dev libeigen3-dev gfortran
+sudo apt-get install libhdf5-dev libprotobuf-dev protobuf-compiler
+sudo apt-get install libgoogle-glog-dev libgflags-dev
 ```
-
-# Install recent version of OpenCV
-
-Use the script file provided, or go to the original repo: https://github.com/mdegans/nano_build_opencv
-
-Create the file called ```build_opencv.sh``` and copy the contents into it.  Make it executable by:
-``` 
-chmod +x build_opencv.sh
+**Now** activate your virtual environment, then move to root and start download / install of opencv.  
 ```
-Then run it:
+# example command to activate virtual environment, for my system
+source ~/projectdir/venvdir/bin/activate
+# move to root
+cd ~
+wget -O opencv.zip https://github.com/opencv/opencv/archive/4.5.1.zip
+wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.5.1.zip
+unzip opencv.zip
+unzip opencv_contrib.zip
+# give them better names
+mv opencv-4.5.1 opencv
+mv opencv_contrib-4.5.1 opencv_contrib
+# clean up zip files
+rm opencv.zip
+rm opencv_contrib.zip
 ```
-./build_opencv.sh
+Now build make.
 ```
-This should build version 4.1.0 of OpenCV, with CUDA optimisations.  Will take quite some time, and requires some user installation confirmation to finalise.
-
-Another resource that may prove useful can be found at this link: https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html
+cd ~/opencv
+mkdir build
+cd build
+```
+Run cmake with all the following flags, and the `..` at the end.  I actually didn't use the -D CMAKE_INSTALL_PREFIX line, but I think it should be fine to use.
+```
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr \
+-D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+-D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
+-D WITH_OPENCL=OFF \
+-D WITH_CUDA=ON \
+-D CUDA_ARCH_BIN=5.3 \
+-D CUDA_ARCH_PTX="" \
+-D WITH_CUDNN=ON \
+-D WITH_CUBLAS=ON \
+-D ENABLE_FAST_MATH=ON \
+-D CUDA_FAST_MATH=ON \
+-D OPENCV_DNN_CUDA=ON \
+-D ENABLE_NEON=ON \
+-D WITH_QT=OFF \
+-D WITH_OPENMP=ON \
+-D BUILD_TIFF=ON \
+-D WITH_FFMPEG=ON \
+-D WITH_GSTREAMER=ON \
+-D WITH_TBB=ON \
+-D BUILD_TBB=ON \
+-D BUILD_TESTS=OFF \
+-D WITH_EIGEN=ON \
+-D WITH_V4L=ON \
+-D WITH_LIBV4L=ON \
+-D OPENCV_ENABLE_NONFREE=ON \
+-D INSTALL_C_EXAMPLES=OFF \
+-D INSTALL_PYTHON_EXAMPLES=OFF \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D BUILD_opencv_python3=TRUE \
+-D OPENCV_GENERATE_PKGCONFIG=ON \
+-D BUILD_EXAMPLES=OFF ..
+```
+Now, run make.  This will run for quite some time, mine took about 5 hours and seemed to be stuck on 100% build for ages, before finalising.  I think it ran out of RAM.
+```
+make -j4
+```
+Now you can remove any pre-installed version of opencv, and install the packages on the system.  Be sure to run this in the `~/opencv/build/` folder.
+```
+sudo rm -r /usr/include/opencv4/opencv2
+sudo make install
+sudo ldconfig
+# clean up to free a few hundred MB
+make clean
+sudo apt-get update
+```
+Now, arguably the most important part to get opencv running in your virtual environment.  Create a symbolic link to the package location:
+```
+cd /usr/local/lib/python3.6/site-packages/cv2/python-3.6
+# give it a good name
+mv cv2.cpython-36m-xxx-linux-gnu.so cv2.so
+# go to your virtual environment python interpreter location
+cd ~/projectdir/venvdir/lib/python3.6/site-packages/
+# you could just link it to the native library for system wide visibility (?)
+cd ~
+# create symlink
+ln -s /usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.so cv2.so
+```
+That's about it.  You could follow the optional clean-up in the q-engineering article, but I won't outline that here.
 
 # Install other dependencies for YOLOv5
 
 Assuming that the above listed installations of python3, pytorch and torchvision have been successful, the remaining requirements can be installed as follows.
-
-
-# Attempt #2
-Try following the following instructions:
-https://github.com/ultralytics/yolov5/issues/2524
-
-Converter from pytorch to trt:
-https://github.com/NVIDIA-AI-IOT/torch2trt
-
-Full tutorials:
-https://github.com/dusty-nv/jetson-inference
-
-# Version 3
-
-Follow this:
-https://www.pyimagesearch.com/2020/03/25/how-to-configure-your-nvidia-jetson-nano-for-computer-vision-and-deep-learning/
 
 # Finalisation
 
