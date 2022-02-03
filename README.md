@@ -5,7 +5,7 @@ Setup for the NVIDIA Nano Developer's board, to enable use with RPi HQ Camera, O
 
 Follow the documentation: https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-2gb-devkit#prepare
 
-Ensure to update to most recent software versions if prompted.
+Ensure to update to most recent software versions if prompted.  I am running JetPack 4.6
 
 # Configuration
 
