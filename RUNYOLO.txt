@@ -1,0 +1,5 @@
+recommended to run in virtual environment.
+
+run command:
+
+python detect.py --source <folder, file or 0 for webcam> --weights <path to best.pt file> --img <resolution, 1280 or 640>
