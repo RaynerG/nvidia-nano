@@ -1,6 +1,8 @@
 # nvidia-nano
 Setup for the NVIDIA Nano Developer's board, to enable use with RPi HQ Camera, OpenCV and YOLOv5.
 
+2nd part details setup of ROS system.
+
 # Disk imaging
 
 Follow the documentation: https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-2gb-devkit#prepare
@@ -291,4 +293,43 @@ To capture the dependencies required for the project, do the following in the pr
 pip3 freeze > requirements.txt
 ```
 This will enable restoration if required.
+
+
+# Part 2: ROS Setup
+
+Following this guide: https://automaticaddison.com/how-to-install-ros-melodic-on-the-nvidia-jetson-nano/
+
+Ran the following commands, as detailed above:
+```
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt update
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+sudo apt-get update
+```
+I then ran the slightly different command, to install the basic version of ROS, then set up environment variables:
+```
+sudo apt install ros-melodic-ros-base
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+Can now check the ROS environment variables:
+```
+export | grep ROS
+```
+Now install other tools:
+```
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+```
+Then initialize ros-dep:
+```
+sudo apt install python-rosdep
+sudo rosdep init
+rosdep update
+```
+To verify installation, check:
+```
+rosversion -d
+```
+Done.
+
 
