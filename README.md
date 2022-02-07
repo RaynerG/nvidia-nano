@@ -310,7 +310,10 @@ I then ran the slightly different command, to install the basic version of ROS, 
 ```
 sudo apt install ros-melodic-ros-base
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
+```
+Now you need to source ROS as well as your virtual environment, so you can add the virtual environment as a 2nd argument:
+```
+source ~/.bashrc ~/venvdir/venvdir/bin/activate
 ```
 Can now check the ROS environment variables:
 ```
