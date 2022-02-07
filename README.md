@@ -297,7 +297,11 @@ This will enable restoration if required.
 
 # Part 2: ROS Setup
 
-Following this guide: https://automaticaddison.com/how-to-install-ros-melodic-on-the-nvidia-jetson-nano/
+Following this guide: 
+https://automaticaddison.com/how-to-install-ros-melodic-on-the-nvidia-jetson-nano/
+https://www.stereolabs.com/blog/ros-and-nvidia-jetson-nano/
+
+Note: to remove all parts of ros, follow instructions here: https://answers.ros.org/question/57213/how-i-completely-remove-all-ros-from-my-system/
 
 Ran the following commands, as detailed above:
 ```
@@ -306,10 +310,11 @@ sudo apt update
 sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 sudo apt-get update
 ```
-I then ran the slightly different command, to install the basic version of ROS, then set up environment variables:
+I installed the mid-range version of ros melodic:
 ```
-sudo apt install ros-melodic-ros-base
+sudo apt install ros-melodic-desktop
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
 ```
 Now you need to source ROS as well as your virtual environment, so you can add the virtual environment as a 2nd argument:
 ```
@@ -325,7 +330,6 @@ sudo apt install python-rosdep python-rosinstall python-rosinstall-generator pyt
 ```
 Then initialize ros-dep:
 ```
-sudo apt install python-rosdep
 sudo rosdep init
 rosdep update
 ```
@@ -335,4 +339,28 @@ rosversion -d
 ```
 Done.
 
+# Set up catkin workspace
 
+Install other dependencies:
+```
+sudo apt-get install cmake python-catkin-pkg python-empy python-nose python-setuptools libgtest-dev python-rosinstall python-rosinstall-generator python-wstool build-essential git
+```
+Create the folders required:
+```
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws
+```
+Run catkin_make:
+```
+catkin_make
+```
+Now you should source the workspace, and optionally add it to bashrc:
+```
+source ~/catkin_ws/devel/setup.bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc 
+```
+Now you should be able to start roscore:
+```
+roscore
+```
+Done.
