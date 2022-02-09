@@ -363,4 +363,19 @@ Now you should be able to start roscore:
 ```
 roscore
 ```
-Done.
+If some ros functions aren't running, always make sure you source your workspace by moving to your `catkin_ws` directory and running:
+```
+source ~/.bashrc
+source devel/setup.bash
+```
+
+# Install Arduino on Nano
+
+Following this guide:
+https://automaticaddison.com/how-to-publish-wheel-encoder-tick-data-using-ros-and-arduino/
+
+This then outlines how to get ROS up and running with wheel encoders.
+
+Relevant information for my motor setup:
+https://wiki.dfrobot.com/12V_DC_Motor_251rpm_w_Encoder__SKU__FIT0186_
+https://wiki.dfrobot.com/7A_Dual_DC_Motor_Driver_SKU__DRI0041
