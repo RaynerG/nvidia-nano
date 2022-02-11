@@ -369,6 +369,17 @@ source ~/.bashrc
 source devel/setup.bash
 ```
 
+# Running Python3 in Melodic
+
+As ROS Melodic uses Python2 by default, need some extra stuff to run python3 nodes.  Firstly, to the top of each script at the python3 shebang: `#!/usr/bin/env python3`, then run the commands below (following this article: https://medium.com/@beta_b0t/how-to-setup-ros-with-python-3-44a69ca36674):
+```
+sudo apt-get install python3-pip python3-yaml
+sudo pip3 install rospkg catkin_pkg
+```
+Now this should work.  
+
+TODO: figure out installation of opencv version compatible with ROS Melodic, and install CV Bridge.
+
 # Install Arduino on Nano
 
 Following this guide:
